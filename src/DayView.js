@@ -15,19 +15,25 @@ var { calculateHeightFromDates } = require('./utils');
 
 var moment = require('moment');
 
+var DEFAULT_HOUR_HEIGHT = 60;
+
 var DayView = React.createClass({
   propTypes: {
     displayDate: PropTypes.object.isRequired,
     events: PropTypes.array.isRequired,
-    onLayout: PropTypes.func.isRequired,
-    onScroll: PropTypes.func.isRequired,
-    hourHeight: PropTypes.number.isRequired,
-    scrollEnabled: PropTypes.bool.isRequired,
+    hourHeight: PropTypes.number,
+    onLayout: PropTypes.func,
+    onScroll: PropTypes.func,
+    scrollEnabled: PropTypes.bool,
+  },
+
+  hourHeight(): number {
+    return this.props.hourHeight ? this.props.hourHeight : DEFAULT_HOUR_HEIGHT;
   },
 
   renderEvents(): Array<ReactElement> {
     var renderer = this.props.children;
-    var { hourHeight } = this.props;
+    var hourHeight = this.hourHeight();
     return this.props.events.map((event) => {
       var height = calculateHeightFromDates(
         event.startDate,
