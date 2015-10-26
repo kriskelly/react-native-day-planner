@@ -60,7 +60,7 @@ var DayView = React.createClass({
 
   renderHourSlots(): Array<ReactElement> {
     var slots = [];
-    for (var i = 0; i < 24; i++) {
+    for (var i = 0; i <= 24; i++) {
       slots.push((
         <View
           key={'slot' + i}
@@ -72,7 +72,7 @@ var DayView = React.createClass({
 
   renderTimeLabels(): Array<ReactElement> {
     var timeLabels = [];
-    for (var i = 0; i < 24; i++) {
+    for (var i = 0; i <= 24; i++) {
       var time = moment(this.props.displayDate).hours(i);
       timeLabels.push((
         <View
