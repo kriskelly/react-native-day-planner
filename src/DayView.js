@@ -17,10 +17,13 @@ var moment = require('moment');
 
 var DEFAULT_HOUR_HEIGHT = 60;
 
+var CurrentTimeIndicator = require('./CurrentTimeIndicator');
+
 var DayView = React.createClass({
   propTypes: {
-    displayDate: PropTypes.object.isRequired,
+    displayDate: PropTypes.instanceOf(Date).isRequired,
     events: PropTypes.array.isRequired,
+    currentTime: PropTypes.instanceOf(Date),
     hourHeight: PropTypes.number,
     onLayout: PropTypes.func,
     onScroll: PropTypes.func,
@@ -85,12 +88,34 @@ var DayView = React.createClass({
     return timeLabels;
   },
 
+  renderTimeIndicator(currentTime: Date): ReactElement {
+    return (
+      <CurrentTimeIndicator
+        displayTime={moment(currentTime).format('h:mm')}
+        top={this.timeIndicatorTop(currentTime)} />
+    );
+  },
+
+  timeIndicatorTop(currentTime: Date): number {
+    return calculateHeightFromDates(
+      this.props.displayDate,
+      currentTime,
+      this.hourHeight()
+    );
+  },
+
   render() {
     var {
+      currentTime,
       onLayout,
       onScroll,
       scrollEnabled,
     } = this.props;
+
+    var timeIndicator;
+    if (currentTime) {
+      timeIndicator = this.renderTimeIndicator(currentTime);
+    }
 
     return (
       <ScrollView
@@ -106,6 +131,7 @@ var DayView = React.createClass({
             {this.renderHourSlots()}
             {this.renderEvents()}
           </View>
+          {timeIndicator}
         </View>
       </ScrollView>
     );
