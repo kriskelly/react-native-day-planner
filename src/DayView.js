@@ -21,7 +21,7 @@ var CurrentTimeIndicator = require('./CurrentTimeIndicator');
 
 var DayView = React.createClass({
   propTypes: {
-    displayDate: PropTypes.instanceOf(Date).isRequired,
+    dayStartDate: PropTypes.instanceOf(Date).isRequired,
     events: PropTypes.array.isRequired,
     currentTime: PropTypes.instanceOf(Date),
     hourHeight: PropTypes.number,
@@ -45,7 +45,7 @@ var DayView = React.createClass({
       );
 
       var top = calculateHeightFromDates(
-        this.props.displayDate,
+        this.props.dayStartDate,
         event.startDate,
         hourHeight
       );
@@ -76,7 +76,7 @@ var DayView = React.createClass({
   renderTimeLabels(): Array<ReactElement> {
     var timeLabels = [];
     for (var i = 0; i <= 24; i++) {
-      var time = moment(this.props.displayDate).hours(i);
+      var time = moment(this.props.dayStartDate).hours(i);
       timeLabels.push((
         <View
           key={'label' + i}
@@ -98,7 +98,7 @@ var DayView = React.createClass({
 
   timeIndicatorTop(currentTime: Date): number {
     return calculateHeightFromDates(
-      this.props.displayDate,
+      this.props.dayStartDate,
       currentTime,
       this.hourHeight()
     );
