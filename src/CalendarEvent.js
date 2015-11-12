@@ -28,7 +28,6 @@ var CalendarEvent = React.createClass({
 
 var styles = StyleSheet.create({
   calendarEvent: {
-    backgroundColor: 'lightgreen',
     position: 'absolute',
   },
 });
