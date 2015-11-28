@@ -2,10 +2,10 @@
 
 'use strict';
 
-var moment = require('moment');
+import moment from 'moment';
 
-function roundSecondsToHours(seconds: number, roundingIntervalInMinutes: number = 15): number {
-  var roundedSeconds;
+export function roundSecondsToHours(seconds: number, roundingIntervalInMinutes: number = 15): number {
+  let roundedSeconds;
   if (seconds > 0) {
     roundedSeconds = Math.floor(seconds / (roundingIntervalInMinutes * 60.0)) * (roundingIntervalInMinutes * 60);
   } else {
@@ -14,18 +14,28 @@ function roundSecondsToHours(seconds: number, roundingIntervalInMinutes: number 
   return roundedSeconds / 3600.0;
 }
 
-function calculateHeightFromDates(startDate: Date, endDate: Date, hourHeight: number): number {
+export function calculateHeightFromDates(startDate: Date, endDate: Date, hourHeight: number): number {
   // Diff the event start and end.
-  var start = moment(startDate);
-  var end = moment(endDate);
-  var diff = end.diff(start, 'seconds');
+  const start = moment(startDate);
+  const end = moment(endDate);
+  const diff = end.diff(start, 'seconds');
   return calculateHeightFromTimeLength(diff, hourHeight);
 }
 
-function calculateHeightFromTimeLength(timeLengthInSeconds, hourHeight: number): number {
+export function calculateHeightFromTimeLength(timeLengthInSeconds, hourHeight: number): number {
   return roundSecondsToHours(timeLengthInSeconds) * hourHeight;
 }
 
-module.exports = {
-  calculateHeightFromDates
-};
+export function calculateTimeLengthFromPosition(yPos: number, hourHeight: number): number {
+  const hours = yPos / hourHeight;
+  return roundSecondsToHours(hours * 3600);
+}
+
+export function calculateDateFromPositionOffset(yOffset: number, originalDate: Date, hourHeight: number): Date {
+  const timeLengthInHours = calculateTimeLengthFromPosition(yOffset, hourHeight);
+  return moment(originalDate).add(timeLengthInHours, 'hours').toDate();
+}
+
+export function calculateDateFromHourOffset(hourOffset: number, originalDate: Date): Date {
+  return moment(originalDate).add(hourOffset, 'hours').toDate();
+}

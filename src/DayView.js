@@ -2,8 +2,8 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+const {
   PropTypes,
   ScrollView,
   StyleSheet,
@@ -11,15 +11,12 @@ var {
   View,
 } = React;
 
-var { calculateHeightFromDates } = require('./utils');
+import { calculateHeightFromDates } from './utils';
+import { CurrentTimeIndicator } from './CurrentTimeIndicator';
+import moment from 'moment';
 
-var moment = require('moment');
-
-var DEFAULT_HOUR_HEIGHT = 60;
-
-var CurrentTimeIndicator = require('./CurrentTimeIndicator');
-
-var DayView = React.createClass({
+const DEFAULT_HOUR_HEIGHT = 60;
+export const DayView = React.createClass({
   propTypes: {
     dayStartDate: PropTypes.instanceOf(Date).isRequired,
     events: PropTypes.array.isRequired,
@@ -138,7 +135,7 @@ var DayView = React.createClass({
   }
 });
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
   },
@@ -160,5 +157,3 @@ var styles = StyleSheet.create({
     textAlign: 'right',
   }
 });
-
-module.exports = DayView;

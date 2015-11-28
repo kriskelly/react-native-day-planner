@@ -2,15 +2,15 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+const {
   PropTypes,
   StyleSheet,
   Text,
   View,
 } = React;
 
-var CalendarEvent = React.createClass({
+export const CalendarEvent = React.createClass({
   propTypes: {
     style: View.propTypes.style,
     title: PropTypes.string.isRequired,
@@ -26,10 +26,8 @@ var CalendarEvent = React.createClass({
   },
 });
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   calendarEvent: {
     position: 'absolute',
   },
 });
-
-module.exports = CalendarEvent;

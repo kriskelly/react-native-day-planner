@@ -2,15 +2,15 @@
 
 'use strict';
 
-var React = require('react-native');
-var {
+import React from 'react-native';
+const {
   PropTypes,
   StyleSheet,
   Text,
   View,
 } = React;
 
-var CurrentTimeIndicator = React.createClass({
+export const CurrentTimeIndicator = React.createClass({
   propTypes: {
     displayTime: PropTypes.string.isRequired,
     top: PropTypes.number.isRequired,
@@ -27,9 +27,7 @@ var CurrentTimeIndicator = React.createClass({
   }
 });
 
-module.exports = CurrentTimeIndicator;
-
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     flexDirection: 'row',

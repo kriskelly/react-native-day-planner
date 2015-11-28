@@ -2,10 +2,11 @@
 
 'use strict';
 
-var DayView = require('./src/DayView');
-var CalendarEvent = require('./src/CalendarEvent');
-
-module.exports = {
-  CalendarEvent,
-  DayView,
-};
+export { DayView } from './src/DayView';
+export { CalendarEvent } from './src/CalendarEvent';
+export {
+  calculateHeightFromDates,
+  calculateHeightFromTimeLength,
+  calculateDateFromPositionOffset,
+  calculateDateFromHourOffset,
+} from './src/utils';
