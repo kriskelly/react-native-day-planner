@@ -39,22 +39,22 @@ export const DayView = React.createClass({
   },
 
   renderEvents(): Array<ReactElement> {
-    var renderer = this.props.children;
-    var hourHeight = this.hourHeight();
+    const renderer = this.props.children;
+    const hourHeight = this.hourHeight();
     return this.props.events.map((event) => {
-      var height = calculateHeightFromDates(
+      const height = calculateHeightFromDates(
         event.startDate,
         event.endDate,
         hourHeight
       );
 
-      var top = calculateHeightFromDates(
+      const top = calculateHeightFromDates(
         this.props.dayStartDate,
         event.startDate,
         hourHeight
       );
 
-      var styles = {
+      const styles = {
         height,
         top,
         left: 0, // TODO: Customize for stacked events.
@@ -66,8 +66,8 @@ export const DayView = React.createClass({
   },
 
   renderHourSlots(): Array<ReactElement> {
-    var slots = [];
-    for (var i = 0; i <= 24; i++) {
+    const slots = [];
+    for (let i = 0; i <= 24; i++) {
       slots.push((
         <View
           key={'slot' + i}
@@ -78,9 +78,9 @@ export const DayView = React.createClass({
   },
 
   renderTimeLabels(): Array<ReactElement> {
-    var timeLabels = [];
-    for (var i = 0; i <= 24; i++) {
-      var time = moment(this.props.dayStartDate).hours(i);
+    const timeLabels = [];
+    for (let i = 0; i <= 24; i++) {
+      const time = moment(this.props.dayStartDate).hours(i);
       timeLabels.push((
         <View
           key={'label' + i}
@@ -109,7 +109,7 @@ export const DayView = React.createClass({
   },
 
   render() {
-    var {
+    const {
       contentOffset,
       currentTime,
       onLayout,
@@ -117,12 +117,10 @@ export const DayView = React.createClass({
       scrollEnabled,
     } = this.props;
 
-    var timeIndicator;
+    let timeIndicator;
     if (currentTime) {
       timeIndicator = this.renderTimeIndicator(currentTime);
     }
-
-    console.log('DayView render');
 
     return (
       <ScrollView

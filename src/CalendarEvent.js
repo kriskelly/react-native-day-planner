@@ -17,7 +17,7 @@ export const CalendarEvent = React.createClass({
   },
 
   render() {
-    var { style, title } = this.props;
+    const { style, title } = this.props;
     return (
       <View style={[styles.calendarEvent, style]}>
         <Text>{title}</Text>

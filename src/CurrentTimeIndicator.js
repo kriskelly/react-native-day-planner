@@ -17,7 +17,7 @@ export const CurrentTimeIndicator = React.createClass({
   },
 
   render() {
-    var { displayTime, top } = this.props;
+    const { displayTime, top } = this.props;
     return (
       <View style={[styles.container, { top }]}>
         <Text style={styles.text}>{displayTime}</Text>
