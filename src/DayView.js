@@ -18,6 +18,7 @@ import moment from 'moment';
 const DEFAULT_HOUR_HEIGHT = 60;
 export const DayView = React.createClass({
   propTypes: {
+    contentOffset: PropTypes.object,
     dayStartDate: PropTypes.instanceOf(Date).isRequired,
     events: PropTypes.array.isRequired,
     currentTime: PropTypes.instanceOf(Date),
@@ -27,8 +28,14 @@ export const DayView = React.createClass({
     scrollEnabled: PropTypes.bool,
   },
 
+  scrollView: (null: ?Object),
+
   hourHeight(): number {
     return this.props.hourHeight ? this.props.hourHeight : DEFAULT_HOUR_HEIGHT;
+  },
+
+  scrollTo(destY?: number, destX?: number) {
+    this.scrollView && this.scrollView.scrollTo(destY, destX);
   },
 
   renderEvents(): Array<ReactElement> {
@@ -103,6 +110,7 @@ export const DayView = React.createClass({
 
   render() {
     var {
+      contentOffset,
       currentTime,
       onLayout,
       onScroll,
@@ -114,11 +122,15 @@ export const DayView = React.createClass({
       timeIndicator = this.renderTimeIndicator(currentTime);
     }
 
+    console.log('DayView render');
+
     return (
       <ScrollView
+        contentOffset={contentOffset}
         scrollEnabled={scrollEnabled}
         onLayout={onLayout}
         scrollEventThrottle={1}
+        ref={component => this.scrollView = component}
         onScroll={onScroll}>
         <View style={styles.container}>
           <View style={styles.timeLabelsContainer}>
