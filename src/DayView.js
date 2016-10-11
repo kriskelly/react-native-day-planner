@@ -2,13 +2,16 @@
 
 'use strict';
 
-import React from 'react-native';
-const {
-  PropTypes,
+import React from 'react';
+import {
   ScrollView,
   StyleSheet,
   Text,
   View,
+} from 'react-native';
+
+const {
+  PropTypes,
 } = React;
 
 import { calculateHeightFromDates } from './utils';
@@ -115,6 +118,7 @@ export const DayView = React.createClass({
       onLayout,
       onScroll,
       scrollEnabled,
+      style,
     } = this.props;
 
     let timeIndicator;
@@ -129,6 +133,7 @@ export const DayView = React.createClass({
         onLayout={onLayout}
         scrollEventThrottle={1}
         ref={component => this.scrollView = component}
+        style={style}
         onScroll={onScroll}>
         <View style={styles.container}>
           <View style={styles.timeLabelsContainer}>
@@ -160,6 +165,10 @@ const styles = StyleSheet.create({
     borderTopColor: 'lightgray',
     borderTopWidth: 1,
     borderBottomWidth: 0,
+  },
+  scrollView: {
+    flex: 1,
+    width: 200,
   },
   timeLabelText: {
     marginRight: 10,

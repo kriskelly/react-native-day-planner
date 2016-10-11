@@ -2,12 +2,15 @@
 
 'use strict';
 
-import React from 'react-native';
-const {
-  PropTypes,
+import React from 'react';
+import {
   StyleSheet,
   Text,
   View,
+} from 'react-native';
+
+const {
+  PropTypes,
 } = React;
 
 export const CurrentTimeIndicator = React.createClass({
