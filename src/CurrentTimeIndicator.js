@@ -9,9 +9,7 @@ import {
   View,
 } from 'react-native';
 
-const {
-  PropTypes,
-} = React;
+import PropTypes from 'prop-types';
 
 export const CurrentTimeIndicator = React.createClass({
   propTypes: {
